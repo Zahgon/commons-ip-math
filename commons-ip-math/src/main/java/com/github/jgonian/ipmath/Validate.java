@@ -29,30 +29,22 @@ public final class Validate {
     }
 
     public static void isTrue(boolean expression) {
-        isTrue(expression, "");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static void isTrue(boolean expression, String message) {
-        if (!expression) {
-            throw new IllegalArgumentException(message);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static <T> T notNull(T object) {
-        return notNull(object, "");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static <T> T notNull(T object, String message) {
-        if (object == null) {
-            throw new IllegalArgumentException(message);
-        }
-        return object;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static <T extends Comparable<T>> T checkRange(T value, T begin, T end) {
-        if (value.compareTo(begin) >= 0 && value.compareTo(end) <= 0) {
-            return value;
-        }
-        throw new IllegalArgumentException("Value [" + value + "] out of range: [" + begin + ".." + end + "]");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

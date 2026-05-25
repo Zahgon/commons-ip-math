@@ -31,7 +31,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
 import static java.math.BigInteger.ZERO;
 
 public final class PrefixUtils {
@@ -39,34 +38,23 @@ public final class PrefixUtils {
     private PrefixUtils() {
     }
 
-    public static <C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>>
-    boolean isLegalPrefix(AbstractIpRange<C, R> range) {
-        int prefixLength = range.start().getCommonPrefixLength(range.end());
-        C lowerBoundForPrefix = range.start().lowerBoundForPrefix(prefixLength);
-        C upperBoundForPrefix = range.end().upperBoundForPrefix(prefixLength);
-        return range.start().equals(lowerBoundForPrefix) && range.end().equals(upperBoundForPrefix);
+    public static <C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>> boolean isLegalPrefix(AbstractIpRange<C, R> range) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static <C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>>
-    int getPrefixLength(AbstractIpRange<C, R> range) {
-        Validate.isTrue(isLegalPrefix(range), range.toStringInRangeNotation() + " is not a legal prefix, cannot get prefix length!");
-        return range.start().getCommonPrefixLength(range.end());
+    public static <C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>> int getPrefixLength(AbstractIpRange<C, R> range) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static <C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>>
-    Optional<R> findMinimumPrefixForPrefixLength(R range, int prefixLength) {
-        Validate.checkRange(prefixLength, 0, range.start().bitSize());
-        return findPrefixForPrefixLength(range, prefixLength, SizeComparator.<R>get());
+    public static <C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>> Optional<R> findMinimumPrefixForPrefixLength(R range, int prefixLength) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static <C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>>
-    Optional<R> findMaximumPrefixForPrefixLength(R range, int prefixLength) {
-        Validate.checkRange(prefixLength, 0, range.start().bitSize());
-        return findPrefixForPrefixLength(range, prefixLength, SizeComparator.<R>reverse());
+    public static <C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>> Optional<R> findMaximumPrefixForPrefixLength(R range, int prefixLength) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private static <C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>>
-    Optional<R> findPrefixForPrefixLength(R range, int prefixLength, Comparator<? super R> comparator) {
+    private static <C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>> Optional<R> findPrefixForPrefixLength(R range, int prefixLength, Comparator<? super R> comparator) {
         List<R> prefixes = range.splitToPrefixes();
         Collections.sort(prefixes, comparator);
         for (R prefix : prefixes) {
@@ -79,13 +67,12 @@ public final class PrefixUtils {
 
     // TODO(yg): generify and move to AbstractIp
     public static int findMaxPrefixLengthForAddress(Ipv6 address) {
-        return getMaxValidPrefix(address.value());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static int getMaxValidPrefix(BigInteger number) {
         int powerOfTwo = 0;
         int maxPowerOfTwo = powerOfTwo;
-
         while (powerOfTwo <= Ipv6.NUMBER_OF_BITS && number.divideAndRemainder(BigInteger.ONE.shiftLeft(powerOfTwo))[1].compareTo(ZERO) == 0) {
             maxPowerOfTwo = powerOfTwo;
             powerOfTwo++;
@@ -94,37 +81,23 @@ public final class PrefixUtils {
     }
 
     public static int sumIpv4Prefixes(List<Integer> ipv4Prefixes) {
-        return doSumIpvX(ipv4Prefixes, Ipv4.NUMBER_OF_BITS);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static int sumIpv6Prefixes(List<Integer> ipv6Prefixes) {
-        return doSumIpvX(ipv6Prefixes, Ipv6.NUMBER_OF_BITS);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static int doSumIpvX(List<Integer> prefixes, int bitSize) {
         double addressSize = 0;
-        for (Integer prefix: prefixes) {
+        for (Integer prefix : prefixes) {
             Validate.checkRange(prefix, 1, bitSize);
             addressSize += Math.pow(2, bitSize - prefix);
         }
         return (int) Math.floor(bitSize - (Math.log(addressSize) / Math.log(2)));
     }
 
-    public static <C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>>
-    SortedSet<R> excludeFromRangeAndSplitIntoPrefixes(R originalRange, Set<R> rangesToExclude) {
-
-        SortedRangeSet<C, R> remainingRanges = new SortedRangeSet<C, R>();
-        remainingRanges.add(originalRange);
-        remainingRanges.removeAll(rangesToExclude);
-
-        SortedSet<R> prefixes = new TreeSet<R>(StartAndSizeComparator.<C, R>get());
-
-        for (R assignmentRange : remainingRanges) {
-            for (R range : assignmentRange.splitToPrefixes()) {
-                prefixes.add(range);
-            }
-        }
-        return prefixes;
+    public static <C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>> SortedSet<R> excludeFromRangeAndSplitIntoPrefixes(R originalRange, Set<R> rangesToExclude) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

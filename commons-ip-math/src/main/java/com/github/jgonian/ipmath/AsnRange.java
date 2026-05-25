@@ -31,45 +31,41 @@ public final class AsnRange extends AbstractRange<Asn, AsnRange> implements Inte
 
     @Override
     protected AsnRange newInstance(Asn start, Asn end) {
-        return new AsnRange(start, end);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static AsnRangeBuilder from(Long from) {
-        return from(Asn.of(from));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static AsnRangeBuilder from(Asn from) {
-        return new AsnRangeBuilder(from);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static AsnRangeBuilder from(String from) {
-        return new AsnRangeBuilder(Asn.parse(from));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static AsnRange parse(String text) {
-        int idx = text.indexOf('-');
-        Validate.isTrue(idx != -1, "Invalid range of ASNs: '" + text + "'");
-        Asn start = Asn.parse(text.substring(0, idx));
-        Asn end = Asn.parse(text.substring(idx + 1));
-        return new AsnRange(start, end);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean containsOnly16BitAsns() {
-        return end().is16Bit();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean containsOnly32BitAsns() {
-        return start().is32Bit();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return start() + "-" + end();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Long size() {
-        return (end().value() - start().value()) + 1;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class AsnRangeBuilder extends AbstractRangeBuilder<Asn, AsnRange> {
@@ -81,16 +77,16 @@ public final class AsnRange extends AbstractRange<Asn, AsnRange> implements Inte
         }
 
         public AsnRange to(Long end) {
-            return to(Asn.of(end));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public AsnRange to(String end) {
-            return to(Asn.parse(end));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public AsnRange to(Asn to) {
-            return new AsnRange(from, to);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

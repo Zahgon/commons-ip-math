@@ -28,15 +28,21 @@ import java.math.BigInteger;
 public final class Asn implements SingleInternetResource<Asn, AsnRange>, Comparable<Asn> {
 
     private static final long serialVersionUID = -1L;
+
     private static final int SIXTEEN = 16;
+
     private static final int THIRTY_TWO = 32;
 
     public static final long ASN_MIN_VALUE = 0L;
+
     public static final long ASN_16_BIT_MAX_VALUE = (1L << SIXTEEN) - 1L;
+
     public static final long ASN_32_BIT_MAX_VALUE = (1L << THIRTY_TWO) - 1L;
 
     public static final Asn FIRST_ASN = Asn.of(ASN_MIN_VALUE);
+
     public static final Asn LAST_16_BIT_ASN = Asn.of(ASN_16_BIT_MAX_VALUE);
+
     public static final Asn LAST_32_BIT_ASN = Asn.of(ASN_32_BIT_MAX_VALUE);
 
     public static final int NUMBER_OF_BITS = THIRTY_TWO;
@@ -49,15 +55,15 @@ public final class Asn implements SingleInternetResource<Asn, AsnRange>, Compara
     }
 
     long value() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Asn of(Long value) {
-        return new Asn(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Asn of(String value) {
-        return parse(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -71,93 +77,69 @@ public final class Asn implements SingleInternetResource<Asn, AsnRange>, Compara
      * Textual Representation of Autonomous System (AS) Numbers</a>
      */
     public static Asn parse(String text) {
-        try {
-            String asnString = Validate.notNull(text, "AS Number must not be null").trim().toUpperCase();
-            if (asnString.startsWith("AS")) {
-                asnString = asnString.substring(2);
-            }
-            long low;
-            long high = 0L;
-            int indexOfDot = asnString.indexOf('.');
-            if (indexOfDot != -1) {
-                low = Validate.checkRange(Long.valueOf(asnString.substring(indexOfDot + 1)), ASN_MIN_VALUE, ASN_16_BIT_MAX_VALUE);
-                high = Validate.checkRange(Long.valueOf(asnString.substring(0, indexOfDot)), ASN_MIN_VALUE, ASN_16_BIT_MAX_VALUE);
-            } else {
-                low = Long.valueOf(asnString);
-            }
-            return new Asn((high << SIXTEEN) | low);
-        } catch (Exception ex) {
-            throw new IllegalArgumentException("Invalid AS number: '" + text + "'. Details: " + ex.getMessage(), ex);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean is16Bit() {
-        return this.compareTo(LAST_16_BIT_ASN) <= 0;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean is32Bit() {
-        return !is16Bit();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int compareTo(Asn other) {
-        return value > other.value ? 1 : value < other.value ? -1 : 0;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Asn next() {
-        return new Asn(value + 1);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Asn previous() {
-        return new Asn(value - 1);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean hasNext() {
-        return this.compareTo(LAST_32_BIT_ASN) < 0;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean hasPrevious() {
-        return this.compareTo(FIRST_ASN) > 0;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return "AS" + value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public AsnRange asRange() {
-        return new AsnRange(this, this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int bitSize() {
-        return NUMBER_OF_BITS;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BigInteger asBigInteger() {
-        return BigInteger.valueOf(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Asn that = (Asn) o;
-        return value == that.value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return (int) (value ^ (value >>> 32));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

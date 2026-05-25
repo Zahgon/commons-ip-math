@@ -47,22 +47,15 @@ public class SortedRangeSet<C extends Rangeable<C, R>, R extends Range<C, R>> im
     }
 
     public void addAll(SortedRangeSet<C, R> ranges) {
-        for (R range : ranges) {
-            add(range);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void addAll(Collection<R> ranges) {
-        for (R range : ranges) {
-            add(range);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void add(R range) {
-        if (contains(range)) {
-            return;
-        }
-        freeAndMergeConsecutive(range);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void freeAndMergeConsecutive(R range) {
@@ -84,128 +77,80 @@ public class SortedRangeSet<C extends Rangeable<C, R>, R extends Range<C, R>> im
     }
 
     public void removeAll(SortedRangeSet<C, R> ranges) {
-        for (R range : ranges) {
-            remove(range);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void removeAll(Collection<R> ranges) {
-        for (R range : ranges) {
-            remove(range);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean remove(R range) {
-        R leftSide = set.floor(range);
-        R rightSide = set.ceiling(range);
-        boolean removed = false;
-        while (range.contains(rightSide)) {
-            set.remove(rightSide);
-            removed = true;
-            rightSide = set.higher(rightSide);
-        }
-        List<R> remainders = new LinkedList<R>();
-        if (leftSide != null && leftSide.overlaps(range)) {
-            set.remove(leftSide);
-            remainders.addAll(leftSide.exclude(range));
-            removed = true;
-        }
-        if (rightSide != null && rightSide.overlaps(range)) {
-            set.remove(rightSide);
-            remainders.addAll(rightSide.exclude(range));
-            removed = true;
-        }
-        set.addAll(remainders);
-        return removed;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public SortedRangeSet<C, R> intersection(SortedRangeSet<C, R> other) {
-        SortedRangeSet<C, R> result = new SortedRangeSet<C, R>();
-        for (R thisRange : set) {
-            R leftSide = other.set.floor(thisRange);
-            R rightSide = other.set.ceiling(thisRange);
-            if (thisRange.overlaps(leftSide)) {
-                result.add(thisRange.intersection(leftSide));
-            }
-            if (thisRange.overlaps(rightSide)) {
-                result.add(thisRange.intersection(rightSide));
-            }
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public final boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof SortedRangeSet)) {
-            return false;
-        }
-        SortedRangeSet that = (SortedRangeSet) o;
-        return set.equals(that.set);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public final int hashCode() {
-        return set.hashCode();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean contains(R range) {
-        R leftmost = set.floor(range);
-        R rightmost = set.ceiling(range);
-        return (leftmost != null && leftmost.contains(range)) || (rightmost != null && rightmost.contains(range));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void clear() {
-        set.clear();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean isEmpty() {
-        return set.isEmpty();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int size() {
-        return set.size();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return an unmodifiable instance of this {@link SortedRangeSet} as a {@link Set}
      */
     public Set<R> unmodifiableSet() {
-        return Collections.unmodifiableSet(set);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return a modifiable copy of this {@link SortedRangeSet} as a {@link Set}
      */
     public Set<R> modifiableSet() {
-        TreeSet<R> copy = new TreeSet<R>(set.comparator());
-        copy.addAll(set);
-        return copy;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public R getSingleRange() {
-        Validate.isTrue(set.size() == 1, "Expected exactly one range");
-        return set.first();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public R floor(R range) {
-        return set.floor(range);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public R ceiling(R range) {
-        return set.ceiling(range);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Iterator<R> iterator() {
-        return set.iterator();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return set.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

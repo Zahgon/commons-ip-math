@@ -36,24 +36,24 @@ public final class Ipv6Range extends AbstractIpRange<Ipv6, Ipv6Range> {
 
     @Override
     protected Ipv6Range newInstance(BigInteger start, BigInteger end) {
-        return Ipv6Range.from(start).to(end);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected Ipv6Range newInstance(Ipv6 start, Ipv6 end) {
-        return new Ipv6Range(start, end);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Ipv6RangeBuilder from(Ipv6 from) {
-        return new Ipv6RangeBuilder(from);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Ipv6RangeBuilder from(BigInteger from) {
-        return new Ipv6RangeBuilder(Ipv6.of(from));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Ipv6RangeBuilder from(String from) {
-        return new Ipv6RangeBuilder(Ipv6.parse(from));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -66,14 +66,7 @@ public final class Ipv6Range extends AbstractIpRange<Ipv6, Ipv6Range> {
      * @see #parseCidr(String)
      */
     public static Ipv6Range parse(String range) {
-        int idx = range.indexOf(DASH);
-        if (idx != -1) {
-            Ipv6 start = Ipv6.parse(range.substring(0, idx));
-            Ipv6 end = Ipv6.parse(range.substring(idx + 1, range.length()));
-            return new Ipv6Range(start, end);
-        } else {
-            return parseCidr(range);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -87,24 +80,16 @@ public final class Ipv6Range extends AbstractIpRange<Ipv6, Ipv6Range> {
      * @see <a href="http://tools.ietf.org/html/rfc4291#section-2.3">rfc4291 §2.3</a>
      */
     public static Ipv6Range parseCidr(String cidrString) {
-        int idx = cidrString.indexOf(SLASH);
-        Validate.isTrue(idx != -1, "Argument [" + cidrString + "] is not a range or does not comply with the CIDR notation");
-        String address = cidrString.substring(0, idx);
-        String prefix = cidrString.substring(idx + 1, cidrString.length());
-        return Ipv6Range.from(address).andPrefixLength(prefix);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Ipv6Range parseDecimalNotation(String range) {
-        int idx = range.indexOf(DASH);
-        Validate.isTrue(idx != -1, "Argument [" + range + "] does not comply with the decimal range notation");
-        BigInteger start = new BigInteger(range.substring(0, idx));
-        BigInteger end = new BigInteger(range.substring(idx + 1, range.length()));
-        return Ipv6Range.from(start).to(end);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BigInteger size() {
-        return (end().value().subtract(start().value())).add(ONE);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class Ipv6RangeBuilder extends AbstractRangeBuilder<Ipv6, Ipv6Range> {
@@ -114,28 +99,26 @@ public final class Ipv6Range extends AbstractIpRange<Ipv6, Ipv6Range> {
         protected Ipv6RangeBuilder(Ipv6 from) {
             this.from = from;
         }
-        
+
         public Ipv6Range to(BigInteger end) {
-            return to(Ipv6.of(end));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Ipv6Range to(String end) {
-            return to(Ipv6.parse(end));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Ipv6Range andPrefixLength(String prefixLength) {
-            return andPrefixLength(Integer.parseInt(prefixLength));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Ipv6Range andPrefixLength(int prefixLength) {
-            Validate.isTrue(from.lowerBoundForPrefix(prefixLength).equals(from),
-                    from + "/" + prefixLength + " is not a legal IPv6 address prefix.");
-            return to(from.upperBoundForPrefix(prefixLength));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Ipv6Range to(Ipv6 to) {
-            return new Ipv6Range(from, to);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

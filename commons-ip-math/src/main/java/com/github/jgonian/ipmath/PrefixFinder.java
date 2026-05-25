@@ -28,6 +28,7 @@ import java.util.Collection;
 public abstract class PrefixFinder {
 
     public interface Strategy {
+
         public Ipv6Range findPrefixOrNull(int prefixLength, Collection<Ipv6Range> ranges);
     }
 
@@ -38,6 +39,6 @@ public abstract class PrefixFinder {
     }
 
     public Ipv6Range findPrefixOrNull(int prefixLength, Collection<Ipv6Range> ranges) {
-        return strategy.findPrefixOrNull(prefixLength, ranges);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

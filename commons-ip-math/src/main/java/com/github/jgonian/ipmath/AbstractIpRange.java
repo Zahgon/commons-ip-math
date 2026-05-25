@@ -26,17 +26,17 @@ package com.github.jgonian.ipmath;
 import java.math.BigInteger;
 import java.util.LinkedList;
 import java.util.List;
-
 import static java.math.BigInteger.ONE;
 import static java.math.BigInteger.ZERO;
 
-public abstract class AbstractIpRange<C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>>
-        extends AbstractRange<C, R>
-        implements InternetResourceRange<C, R> {
+public abstract class AbstractIpRange<C extends AbstractIp<C, R>, R extends AbstractIpRange<C, R>> extends AbstractRange<C, R> implements InternetResourceRange<C, R> {
 
     protected static final String SLASH = "/";
+
     protected static final String DASH = "-";
+
     protected static final String DASH_WITH_SPACES = " - ";
+
     private static final BigInteger TWO = BigInteger.valueOf(2);
 
     protected AbstractIpRange(C start, C end) {
@@ -47,49 +47,27 @@ public abstract class AbstractIpRange<C extends AbstractIp<C, R>, R extends Abst
 
     @Override
     public String toString() {
-        if (PrefixUtils.isLegalPrefix(this)) {
-            return toStringInCidrNotation();
-        } else {
-            return toStringInRangeNotation();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String toStringInRangeNotation() {
-        return start() + DASH + end();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String toStringInRangeNotationWithSpaces() {
-        return start() + DASH_WITH_SPACES + end();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String toStringInCidrNotation() {
-        return start() + SLASH + PrefixUtils.getPrefixLength(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String toStringInDecimalNotation() {
-        return start().asBigInteger() + DASH + end().asBigInteger();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<R> splitToPrefixes() {
-        BigInteger rangeEnd = end().asBigInteger();
-        BigInteger currentRangeStart = start().asBigInteger();
-        int startingPrefixLength = start().bitSize();
-        List<R> prefixes = new LinkedList<R>();
-
-        while (currentRangeStart.compareTo(rangeEnd) <= 0) {
-            int maximumPrefixLength = getMaximumPrefixLengthStartingAtIpAddressValue(currentRangeStart, startingPrefixLength);
-            BigInteger maximumSizeOfPrefix = rangeEnd.subtract(currentRangeStart).add(ONE);
-            BigInteger currentSizeOfPrefix = TWO.pow(maximumPrefixLength);
-
-            while ((currentSizeOfPrefix.compareTo(maximumSizeOfPrefix) > 0) && (maximumPrefixLength > 0)) {
-                maximumPrefixLength--;
-                currentSizeOfPrefix = TWO.pow(maximumPrefixLength);
-            }
-            BigInteger currentRangeEnd = currentRangeStart.add(TWO.pow(maximumPrefixLength).subtract(ONE));
-            prefixes.add(newInstance(currentRangeStart, currentRangeEnd));
-            currentRangeStart = currentRangeEnd.add(ONE);
-        }
-        return prefixes;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private int getMaximumPrefixLengthStartingAtIpAddressValue(BigInteger ipAddressValue, int startingPrefixLength) {

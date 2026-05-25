@@ -32,24 +32,25 @@ public final class SizeComparator<R extends Range<?, R>> implements Comparator<R
     private static final long serialVersionUID = 1L;
 
     private static Comparator<?> instance;
+
     private static Comparator<?> reverse;
 
     @SuppressWarnings("unchecked")
     public static <R extends Range<?, R>> Comparator<R> get() {
-        return (Comparator<R>) (instance == null ? instance = new SizeComparator<R>() : instance);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @SuppressWarnings("unchecked")
     public static <R extends Range<?, R>> Comparator<R> reverse() {
-        return (Comparator<R>) (reverse == null ? reverse = Collections.reverseOrder(SizeComparator.<R>get()) : reverse);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private SizeComparator() {
     }
 
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({ "unchecked" })
     @Override
     public int compare(R left, R right) {
-        return ((Comparable)left.size()).compareTo(right.size());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

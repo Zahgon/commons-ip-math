@@ -23,18 +23,17 @@
  */
 package com.github.jgonian.ipmath;
 
-public class SortedResourceSet<C extends Rangeable<C, R>, R extends Range<C, R>>
-        extends SortedRangeSet<C, R> {
+public class SortedResourceSet<C extends Rangeable<C, R>, R extends Range<C, R>> extends SortedRangeSet<C, R> {
 
     public void add(C resource) {
-        add(resource.asRange());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean remove(C resource) {
-        return remove(resource.asRange());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean contains(C resource) {
-        return contains(resource.asRange());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -35,28 +35,28 @@ public final class Ipv4Range extends AbstractIpRange<Ipv4, Ipv4Range> {
 
     @Override
     protected Ipv4Range newInstance(BigInteger start, BigInteger end) {
-        return Ipv4Range.from(start).to(end);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected Ipv4Range newInstance(Ipv4 start, Ipv4 end) {
-        return new Ipv4Range(start, end);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Ipv4RangeBuilder from(Ipv4 from) {
-        return new Ipv4RangeBuilder(from);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Ipv4RangeBuilder from(BigInteger from) {
-        return new Ipv4RangeBuilder(Ipv4.of(from));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Ipv4RangeBuilder from(Long from) {
-        return new Ipv4RangeBuilder(Ipv4.of(from));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Ipv4RangeBuilder from(String from) {
-        return new Ipv4RangeBuilder(Ipv4.parse(from));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -69,14 +69,7 @@ public final class Ipv4Range extends AbstractIpRange<Ipv4, Ipv4Range> {
      * @see #parseCidr(String)
      */
     public static Ipv4Range parse(String range) {
-        int idx = range.indexOf(DASH);
-        if (idx != -1) {
-            Ipv4 start = Ipv4.parse(range.substring(0, idx));
-            Ipv4 end = Ipv4.parse(range.substring(idx + 1, range.length()));
-            return new Ipv4Range(start, end);
-        } else {
-            return parseCidr(range);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -89,24 +82,16 @@ public final class Ipv4Range extends AbstractIpRange<Ipv4, Ipv4Range> {
      * @see <a href="http://tools.ietf.org/html/rfc4632">rfc4632</a>
      */
     public static Ipv4Range parseCidr(String cidrString) {
-        int idx = cidrString.indexOf(SLASH);
-        Validate.isTrue(idx != -1, "Argument [" + cidrString + "] is not a range or does not comply with the CIDR notation");
-        String address = cidrString.substring(0, idx);
-        String prefix = cidrString.substring(idx + 1, cidrString.length());
-        return Ipv4Range.from(address).andPrefixLength(prefix);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Ipv4Range parseDecimalNotation(String range) {
-        int idx = range.indexOf(DASH);
-        Validate.isTrue(idx != -1, "Argument [" + range + "] does not comply with the decimal range notation");
-        long start = Long.valueOf(range.substring(0, idx));
-        long end = Long.valueOf(range.substring(idx + 1, range.length()));
-        return Ipv4Range.from(start).to(end);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Long size() {
-        return (end().value() - start().value()) + 1;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class Ipv4RangeBuilder extends AbstractRangeBuilder<Ipv4, Ipv4Range> {
@@ -118,30 +103,28 @@ public final class Ipv4Range extends AbstractIpRange<Ipv4, Ipv4Range> {
         }
 
         public Ipv4Range to(BigInteger end) {
-            return to(Ipv4.of(end));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Ipv4Range to(Long end) {
-            return to(Ipv4.of(end));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Ipv4Range to(String end) {
-            return to(Ipv4.parse(end));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Ipv4Range andPrefixLength(String prefix) {
-            return andPrefixLength(Integer.parseInt(prefix));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Ipv4Range andPrefixLength(int prefixLength) {
-            Validate.isTrue(from.lowerBoundForPrefix(prefixLength).equals(from),
-                    from + "/" + prefixLength + " is not a legal IPv4 address prefix.");
-            return to(from.upperBoundForPrefix(prefixLength));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Ipv4Range to(Ipv4 to) {
-            return new Ipv4Range(from, to);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

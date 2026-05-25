@@ -25,7 +25,6 @@ package com.github.jgonian.ipmath;
 
 import java.math.BigInteger;
 import java.util.regex.Pattern;
-
 import static java.math.BigInteger.ONE;
 
 public final class Ipv6 extends AbstractIp<Ipv6, Ipv6Range> {
@@ -33,22 +32,35 @@ public final class Ipv6 extends AbstractIp<Ipv6, Ipv6Range> {
     private static final long serialVersionUID = -1L;
 
     public static final BigInteger FOUR_OCTECT_MASK = BigInteger.valueOf(0xFFFF);
+
     public static final int NUMBER_OF_BITS = 128;
+
     public static final BigInteger MINIMUM_VALUE = BigInteger.ZERO;
+
     public static final BigInteger MAXIMUM_VALUE = new BigInteger(String.valueOf((ONE.shiftLeft(NUMBER_OF_BITS)).subtract(ONE)));
 
     public static final Ipv6 FIRST_IPV6_ADDRESS = Ipv6.of(MINIMUM_VALUE);
+
     public static final Ipv6 LAST_IPV6_ADDRESS = Ipv6.of(MAXIMUM_VALUE);
 
     private static final int MIN_PART_VALUE = 0x0;
+
     private static final int MAX_PART_VALUE = 0xFFFF;
+
     private static final int MAX_PART_LENGTH = 4;
+
     private static final String DEFAULT_PARSING_ERROR_MESSAGE = "Invalid IPv6 address: '%s'";
+
     private static final String COLON = ":";
+
     private static final String ZERO = "0";
+
     private static final int BITS_PER_PART = 16;
+
     private static final int TOTAL_OCTETS = 8;
+
     private static final int COLON_COUNT_IPV6 = 7;
+
     private static final BigInteger MINUS_ONE = BigInteger.valueOf(-1);
 
     private final BigInteger value;
@@ -60,92 +72,50 @@ public final class Ipv6 extends AbstractIp<Ipv6, Ipv6Range> {
     }
 
     BigInteger value() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Ipv6 of(BigInteger value) {
-        return new Ipv6(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Ipv6 of(String value) {
-        return parse(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int compareTo(Ipv6 other) {
-        return value.compareTo(other.value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Ipv6 next() {
-        return new Ipv6(value.add(ONE));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Ipv6 previous() {
-        return new Ipv6(value.subtract(ONE));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean hasNext() {
-        return this.compareTo(LAST_IPV6_ADDRESS) < 0;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean hasPrevious() {
-        return this.compareTo(FIRST_IPV6_ADDRESS) > 0;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Ipv6Range asRange() {
-        return new Ipv6Range(this, this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        long[] parts = new long[8];
-
-        // Find longest sequence of zeroes. Use the first one if there are
-        // multiple sequences of zeroes with the same length.
-        int currentZeroPartsLength = 0;
-        int currentZeroPartsStart = 0;
-        int maxZeroPartsLength = 0;
-        int maxZeroPartsStart = 0;
-        for (int i = 0; i < parts.length; ++i) {
-            parts[i] = value().shiftRight((7 - i) * BITS_PER_PART).and(FOUR_OCTECT_MASK).longValue();
-            if (parts[i] == 0) {
-                if (currentZeroPartsLength == 0) {
-                    currentZeroPartsStart = i;
-                }
-                ++currentZeroPartsLength;
-                if (currentZeroPartsLength > maxZeroPartsLength) {
-                    maxZeroPartsLength = currentZeroPartsLength;
-                    maxZeroPartsStart = currentZeroPartsStart;
-                }
-            } else {
-                currentZeroPartsLength = 0;
-            }
-        }
-
-        StringBuilder sb = new StringBuilder(39);
-        if (maxZeroPartsStart == 0 && maxZeroPartsLength > 1) {
-            sb.append(COLON);
-        }
-        String delimiter = "";
-        for (int i = 0; i < parts.length; ++i) {
-            if (i == maxZeroPartsStart && maxZeroPartsLength > 1) {
-                i += maxZeroPartsLength;
-                sb.append(COLON);
-            }
-            sb.append(delimiter);
-            if (i <= 7) {
-                sb.append(Long.toHexString(parts[i]));
-            } else {
-                break;
-            }
-            delimiter = COLON;
-        }
-        return sb.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -158,34 +128,7 @@ public final class Ipv6 extends AbstractIp<Ipv6, Ipv6Range> {
      * @see <a href="http://tools.ietf.org/html/rfc4291">rfc4291 - IP Version 6 Addressing Architecture</a>
      */
     public static Ipv6 parse(final String ipv6Address) {
-        try {
-            String ipv6String = Validate.notNull(ipv6Address).trim();
-            Validate.isTrue(!ipv6String.isEmpty());
-
-            final boolean isIpv6AddressWithEmbeddedIpv4 = ipv6String.contains(".");
-            if (isIpv6AddressWithEmbeddedIpv4) {
-                ipv6String = getIpv6AddressWithIpv4SectionInIpv6Notation(ipv6String);
-            }
-
-            final int indexOfDoubleColons = ipv6String.indexOf("::");
-            final boolean isShortened = indexOfDoubleColons != -1;
-            if (isShortened) {
-                Validate.isTrue(indexOfDoubleColons == ipv6String.lastIndexOf("::"));
-                ipv6String = expandMissingColons(ipv6String, indexOfDoubleColons);
-            }
-
-            final String[] split = ipv6String.split(COLON, TOTAL_OCTETS);
-            Validate.isTrue(split.length == TOTAL_OCTETS);
-            BigInteger ipv6value = BigInteger.ZERO;
-            for (String part : split) {
-                Validate.isTrue(part.length() <= MAX_PART_LENGTH);
-                Validate.checkRange(Integer.parseInt(part, BITS_PER_PART), MIN_PART_VALUE, MAX_PART_VALUE);
-                ipv6value = ipv6value.shiftLeft(BITS_PER_PART).add(new BigInteger(part, BITS_PER_PART));
-            }
-            return new Ipv6(ipv6value);
-        } catch (Exception e) {
-            throw new IllegalArgumentException(String.format(DEFAULT_PARSING_ERROR_MESSAGE, ipv6Address), e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static String expandMissingColons(final String ipv6String, final int indexOfDoubleColons) {
@@ -194,11 +137,9 @@ public final class Ipv6 extends AbstractIp<Ipv6, Ipv6Range> {
         final int missingZeros = COLON_COUNT_IPV6 - colonCount + 1;
         String leftPart = ipv6String.substring(0, indexOfDoubleColons);
         String rightPart = ipv6String.substring(indexOfDoubleColons + 2);
-
         if (missingZeros == 0) {
             Validate.isTrue(leftPart.isEmpty() || rightPart.isEmpty());
         }
-
         if (leftPart.isEmpty()) {
             leftPart = ZERO;
         }
@@ -211,7 +152,6 @@ public final class Ipv6 extends AbstractIp<Ipv6, Ipv6Range> {
             sb.append(COLON).append(ZERO);
         }
         sb.append(COLON).append(rightPart);
-
         return sb.toString();
     }
 
@@ -237,25 +177,22 @@ public final class Ipv6 extends AbstractIp<Ipv6, Ipv6Range> {
 
     @Override
     public int bitSize() {
-        return NUMBER_OF_BITS;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public BigInteger asBigInteger() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Ipv6 lowerBoundForPrefix(int prefixLength) {
-        Validate.checkRange(prefixLength, 0, NUMBER_OF_BITS);
-        BigInteger mask = bitMask(0).xor(bitMask(prefixLength));
-        return new Ipv6(value.and(mask));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Ipv6 upperBoundForPrefix(int prefixLength) {
-        Validate.checkRange(prefixLength, 0, NUMBER_OF_BITS);
-        return new Ipv6(value.or(bitMask(prefixLength)));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private BigInteger bitMask(int prefixLength) {
@@ -264,24 +201,16 @@ public final class Ipv6 extends AbstractIp<Ipv6, Ipv6Range> {
 
     @Override
     public int getCommonPrefixLength(Ipv6 other) {
-        BigInteger temp = value.xor(other.value);
-        return NUMBER_OF_BITS - temp.bitLength();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Ipv6 that = (Ipv6) o;
-        return value.equals(that.value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }
